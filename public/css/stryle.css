@@ -1,0 +1,20 @@
+:root{
+	--color1:#0d1b81;
+	--color2:#a9c2d7;
+};
+
+*{
+	font-family: sans-serif;
+}
+
+body{
+	background: url(../sources/fondo.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+p,h1,h2,h3,h4,h5{
+	font-family: sans-serif;
+}
+#personaje>img{
+	width: 100%;
+}
