@@ -1,5 +1,5 @@
 :root{
-	--border: 2px solid orange;
+	--border: none;
 
 };
 *{
@@ -131,5 +131,5 @@ form>button{
 	.c1,.c2,.c3,.c4{
 		width: 98%;
 	}
-	#hNombreJugador
+
 }
