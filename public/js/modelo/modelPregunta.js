@@ -41,7 +41,7 @@ class Pregunta{
 		//lleno el arreglo con hasta 4 opciones, y me aseguro de que no se ponga ninguna opcion repetida
 		do{
 			let o= this.opcionCap(this.resCorrect)
-			if(!opciones.includes(o)){
+			if(!this.existe(opciones,o)){
 				opciones.push(o)
 			}
 		}while(opciones.length<4)
@@ -76,7 +76,7 @@ class Pregunta{
 		//lleno el arreglo con hasta 4 opciones, y me aseguro de que no se ponga ninguna opcion repetida
 		do{
 			let o= this.opcionPais()
-			if(!opciones.includes(o)){
+			if(!this.existe(opciones,o)){
 				opciones.push(o)
 			}
 		}while(opciones.length<4)
@@ -145,6 +145,20 @@ class Pregunta{
 			Juego.respuestaCorrecta()
 		})
 		return box
+	}
+	existe(arr,valor){
+		
+		for(const v of arr){
+			let aux=valor.querySelector('h2')
+			aux=aux.innerText
+			let aux2= v.querySelector('h2')
+			aux2=aux2.innerText
+
+			if(aux===aux2){
+				return true
+			}
+		}
+		return false
 	}
 }
 export default Pregunta

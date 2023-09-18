@@ -6,7 +6,7 @@ frm.addEventListener('submit',(e)=>{
 
 	e.preventDefault()	
 	player = new Jugador(frm.elements.nombre.value)	
-	cl(player.obj)
+	
 	//window.location.assign(`/juego?nombre=${player.nombre}&puntos=${player.puntos}&tiempo=${player.tiempo}`)
 	fetch('/nuevoJugador',{
 		method: 'POST',

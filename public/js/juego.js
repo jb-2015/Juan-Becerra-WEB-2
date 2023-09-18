@@ -38,10 +38,17 @@ function conteoInicial(){
 function preguntar(){
 	if(preguntas<LIMIT_PREGUNTAS){
 		Contenido.getAleatorio(pais=>{
+			if(!elegidos.includes(pais)){
+				elegidos.push(pais)
+				askContent.appendChild(new Pregunta(pais))
+				preguntas++
+			}else{
+				preguntar()
+			}
 
-			askContent.appendChild(new Pregunta(pais))
+			
 		})
-		preguntas++
+		
 	}
 	else{
 		finalizar()
@@ -62,7 +69,7 @@ function respuestaCorrecta(){
 		div.appendChild(ok)
 		askContent.appendChild(div)
 		hPuntos.innerText= correctas+" ptos."
-	},1000)
+	},500)
 	setTimeout(()=>{
 		askContent.innerHTML=""
 		siguiente()
@@ -76,7 +83,7 @@ function respuestaIncorrecta(num){
 	setTimeout(()=>{
 		askContent.classList.add('error')
 		opciones[num].classList.add('correcta')
-	},1000)
+	},500)
 	setTimeout(()=>{
 		askContent.innerHTML=""
 		askContent.classList.remove('error')
@@ -97,7 +104,28 @@ function finalizar(){
 	pararTiempo()
 	let res = new Resultado(nombre,correctas,time);
 	askContent.appendChild(res)
+	guardarPuntuacion()
 	
+}
+function guardarPuntuacion(){
+	let datos= {
+			name: nombre,
+			puntos: correctas,
+			tiempo: time,
+			T_P: (time/correctas).toFixed(2)
+		}
+	fetch('/guardar',{
+		method: 'POST',
+		headers: {
+			'Content-Type':'application/json'
+		},
+		body: JSON.stringify(datos)
+	}).then(res=>res.tex())
+	.then(message=>{
+		console.log(message)
+	}).catch(error=>{
+		console.log(error)
+	})
 }
 function iniciarTiempo(){
 	let seg= 0

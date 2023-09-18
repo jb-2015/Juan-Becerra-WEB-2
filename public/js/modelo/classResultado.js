@@ -15,7 +15,7 @@ class Resultado{
 		time.innerText="Tiempo: "+tiempo
 
 		let tp= document.createElement('h2')
-		tp.innerText= "Tiempo/Puntos: "+(tiempo/puntos)
+		tp.innerText= "Tiempo/Puntos: "+(tiempo/puntos).toFixed(2)
 		let btnHome= document.createElement('button')
 		btnHome.innerText= "Pagina principal"
 		btnHome.classList.add('btnStart')

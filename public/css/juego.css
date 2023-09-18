@@ -49,8 +49,9 @@ main{
 }
 .preguntaT1>img{
 	position: relative;
-	width: 60%;
-	margin-left: 20%;
+	width: 40%;
+	/*margin-left: 20%;*/
+	margin:auto;
 }
 .gifCorrect{
 	border-radius: 50%;

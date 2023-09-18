@@ -15,6 +15,7 @@ function loadCountries(){
 		data.forEach(p=>{
 			countries.push(new Tarjeta(p.name,p.capital,p.flags))			
 		})
+		
 			
 	}).then(()=>{
 		askContent.removeChild(loading)

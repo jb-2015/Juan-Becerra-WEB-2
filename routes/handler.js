@@ -2,6 +2,7 @@ import express from "express";
 import fs from "fs";
 import {getData} from "../api.js"
 import {Controlador} from '../controller/controlerJugador.js'
+import bodyParser from 'body-parser'
 const cl= console.log;
 const handler = express.Router();
 handler.use(express.json())
@@ -15,6 +16,10 @@ handler.get(["/","/home"] ,(req,res)=>{
 handler.post('/nuevoJugador',(req,res)=>{
 	Controlador.crearJugador(req.body)
 	res.send(req.url)
+})
+handler.post('/guardar',(req,res)=>{
+	Controlador.guardarPuntuacion(req.body)
+	res.end({'ok':true})
 })
 handler.get('/juego',(req,res)=>{	
 	
