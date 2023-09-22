@@ -96,6 +96,9 @@ main{
 	display: flex;
 	justify-content: center;
 }
+.miPosicion{
+	background: orange !important;
+}
 
 @media (max-width: 360px){
 	#hNombreJugador{

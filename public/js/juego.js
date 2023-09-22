@@ -15,6 +15,8 @@ let correctas=0
 let preguntas=0
 let time=0
 
+let posResult
+
 
 window.addEventListener('load',()=>{
 	const allCookies=document.cookie
@@ -68,11 +70,11 @@ function respuestaCorrecta(){
 		div.appendChild(ok)
 		askContent.appendChild(div)
 		hPuntos.innerText= correctas+" ptos."
-	},500)
+	},10)
 	setTimeout(()=>{
 		askContent.innerHTML=""
 		siguiente()
-	},3000)
+	},2500)
 	
 
 }
@@ -103,8 +105,13 @@ function finalizar(){
 	pararTiempo()
 	let res = new Resultado(nombre,correctas,time);
 	askContent.appendChild(res)
-	guardarPuntuacion()
-	ranking()
+	const final = async ()=>{
+		await guardarPuntuacion()
+		ranking()
+	}
+	final();
+	
+	
 	
 }
 function guardarPuntuacion(){
@@ -121,8 +128,10 @@ function guardarPuntuacion(){
 		},
 		body: JSON.stringify(datos)
 	})
+	.then(res=>res.json())
 	.then(message=>{
 		console.log(message)
+		posResult=message.pos
 	}).catch(error=>{
 		console.log(error)
 	})
@@ -160,6 +169,17 @@ function ranking(){
 				askContent.appendChild(n.nodo)
 				pos++
 			}
+			
+
+		})
+		let miPos=askContent.querySelectorAll('.posicion')[posResult-1]
+		miPos.classList.add('miPosicion')
+
+		const posTop= miPos.getBoundingClientRect().top + window.scrollY;
+
+		window.scrollTo({
+			top: posTop-300,
+			behavior: 'smooth'
 		})
 
 	})

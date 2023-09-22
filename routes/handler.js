@@ -18,8 +18,10 @@ handler.post('/nuevoJugador',(req,res)=>{
 	res.send(req.url)
 })
 handler.post('/guardar',(req,res)=>{
-	Controlador.guardarPuntuacion(req.body)
-	res.send("hecho")
+	Controlador.guardarPuntuacion(req.body, (pos)=>{
+		res.send({"pos":pos})
+	})
+	
 })
 handler.get('/juego',(req,res)=>{	
 	

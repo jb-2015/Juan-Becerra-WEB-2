@@ -3,7 +3,7 @@ let jugador = []
 let puntuaciones =[]
 let cantPlay=0
 const cl= console.log
-function guardarPuntuacion(puntuacion){
+function guardarPuntuacion(puntuacion,callback){
 		// Leer el archivo JSON existente
 		fs.readFile('./data/puntuaciones.json', 'utf8', (err, data) => {
 		  if (err) {
@@ -27,6 +27,15 @@ function guardarPuntuacion(puntuacion){
 		    
 		    puntuaciones.sort((a,b)=>{
 		    	return a.T_P - b.T_P
+		    })
+
+		    let i=0
+		    puntuaciones.forEach(p=>{
+		    	if(p===puntuacion){
+		    		callback(i+1)
+		    		
+		    	}
+		    	i++
 		    })
 
 		    // Convertir el objeto JavaScript actualizado en una cadena JSON
