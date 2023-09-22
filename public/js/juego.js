@@ -1,6 +1,7 @@
 import Pregunta from './modelo/modelPregunta.js'
 import {Contenido} from './contenido.js'
 import Resultado from './modelo/classResultado.js'
+import Posicion from './modelo/classPosicion.js'
 
 const askContent= document.getElementById('askContent')
 const btnStart= document.querySelector('.btnStart')
@@ -31,9 +32,7 @@ window.addEventListener('load',()=>{
 	
 })
 
-function conteoInicial(){
-	
-}
+
 
 function preguntar(){
 	if(preguntas<LIMIT_PREGUNTAS){
@@ -105,6 +104,7 @@ function finalizar(){
 	let res = new Resultado(nombre,correctas,time);
 	askContent.appendChild(res)
 	guardarPuntuacion()
+	ranking()
 	
 }
 function guardarPuntuacion(){
@@ -120,7 +120,7 @@ function guardarPuntuacion(){
 			'Content-Type':'application/json'
 		},
 		body: JSON.stringify(datos)
-	}).then(res=>res.tex())
+	})
 	.then(message=>{
 		console.log(message)
 	}).catch(error=>{
@@ -141,6 +141,32 @@ function pararTiempo(){
 	clearInterval(setI)
 }
 
+function ranking(){
+	fetch('/ranking')
+	.then(res=> res.json())
+	.then(datos=>{
+		console.log(datos+" Tipo de dato: " + typeof datos)
+		const yo= {
+			name: nombre,
+			puntos: correctas,
+			tiempo: time,
+			T_P: (time/correctas).toFixed(2),
+
+		}
+		let pos = 1
+		datos.forEach(d=>{
+			if(pos<=20){
+				let n = new Posicion(d,pos)
+				askContent.appendChild(n.nodo)
+				pos++
+			}
+		})
+
+	})
+	.catch(error=>{
+		console.log("Error: "+error)
+	})
+}
 
 export const Juego ={
 	preguntar,

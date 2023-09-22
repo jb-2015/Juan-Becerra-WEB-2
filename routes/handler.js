@@ -19,7 +19,7 @@ handler.post('/nuevoJugador',(req,res)=>{
 })
 handler.post('/guardar',(req,res)=>{
 	Controlador.guardarPuntuacion(req.body)
-	res.end({'ok':true})
+	res.send("hecho")
 })
 handler.get('/juego',(req,res)=>{	
 	
@@ -27,6 +27,12 @@ handler.get('/juego',(req,res)=>{
 		if(error) throw error;
 		res.end(data)
 
+	})
+})
+
+handler.get('/ranking',(req,res)=>{
+	Controlador.obtenerRanking(rank=>{
+		res.send(JSON.parse(rank))
 	})
 })
 

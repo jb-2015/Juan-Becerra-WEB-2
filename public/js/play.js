@@ -18,7 +18,7 @@ frm.addEventListener('submit',(e)=>{
 		const fechaExpiracion = new Date()
 		fechaExpiracion.setDate(fechaExpiracion.getDate()+1)
 		const fExpGTM = fechaExpiracion.toUTCString()
-		document.cookie = `usuario= ${player.nombre}; expires=${fExpGTM}; path=/`
+		document.cookie = `usuario= ${player.nombre}; expires=${fExpGTM}; path=/`		
 		window.location.assign('/juego')
 		
 	}).catch(error=>{

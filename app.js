@@ -10,11 +10,11 @@ app.use(handler);
 const server = http.createServer(app);
 
 // Usar la clase SocketIOServer para crear una instancia de socket.io
-const sk = new SocketIOServer(server);
+//const sk = new SocketIOServer(server);
 
-const clients = {};
+//const clients = {};
 
-sk.on('connection', (socket) => {
+/*sk.on('connection', (socket) => {
   cl("Un cliente se ha conectado: ", socket.id);
   clients[socket.id] = true;
 
@@ -28,7 +28,7 @@ sk.on('connection', (socket) => {
 
     sk.emit('updateClients', Object.keys(clients));
   });
-});
+});*/
 
 
 
