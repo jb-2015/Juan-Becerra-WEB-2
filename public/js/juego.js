@@ -108,6 +108,7 @@ function finalizar(){
 	guardarPuntuacion()
 	.then(ranking())
 	
+	
 }
 function guardarPuntuacion(){
 	return new Promise(()=>{

@@ -52,8 +52,9 @@ function guardarPuntuacion(puntuacion,callback){
 		  } catch (error) {
 		    console.error('Error al analizar el contenido JSON:', error);
 		  }
+		  console.log('guardado')
 		});
-	
+		
 }
 function crearJugador(player){	
 	jugador.push(player)
@@ -80,6 +81,7 @@ function obtenerRanking(callback){
 	fs.readFile('./data/puntuaciones.json','utf8',(err,data)=>{
 			if(err) throw err
 
+			console.log('Ranking')	
 			callback(data)
 	})
 }
