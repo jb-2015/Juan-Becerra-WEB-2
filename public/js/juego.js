@@ -105,35 +105,33 @@ function finalizar(){
 	pararTiempo()
 	let res = new Resultado(nombre,correctas,time);
 	askContent.appendChild(res)
-	const final = async ()=>{
-		await guardarPuntuacion()
-		ranking()
-	}
-	final();
-	
-	
+	guardarPuntuacion()
+	.then(ranking())
 	
 }
 function guardarPuntuacion(){
-	let datos= {
+	return new Promise(()=>{
+		let datos= {
 			name: nombre,
 			puntos: correctas,
 			tiempo: time,
 			T_P: (time/correctas).toFixed(2)
 		}
-	fetch('/guardar',{
-		method: 'POST',
-		headers: {
-			'Content-Type':'application/json'
-		},
-		body: JSON.stringify(datos)
-	})
-	.then(res=>res.json())
-	.then(message=>{
-		console.log(message)
-		posResult=message.pos
-	}).catch(error=>{
-		console.log(error)
+		fetch('/guardar',{
+			method: 'POST',
+			headers: {
+				'Content-Type':'application/json'
+			},
+			body: JSON.stringify(datos)
+		})
+		.then(res=>res.json())
+		.then(message=>{
+			console.log(message)
+			posResult=message.pos
+		}).catch(error=>{
+			console.log(error)
+		})
+
 	})
 }
 function iniciarTiempo(){
